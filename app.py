@@ -1,44 +1,48 @@
-हो. खाली चालणारा app.py देतो. हा Streamlit + OpenAI Responses API वापरतो.
-app.py
 import streamlit as st
 from openai import OpenAI
 
-st.set_page_config(page_title="MindDepth", page_icon="🧠")
+st.set_page_config(
+    page_title="MindDepth",
+    page_icon="🧠",
+    layout="centered"
+)
 
 st.title("🧠 MindDepth")
-st.caption("Explore any thought deeply")
+st.write("Ask any question and explore it deeply with AI.")
 
-api_key = st.secrets.get("OPENAI_API_KEY")
-
-if not api_key:
-    st.error("OPENAI_API_KEY not found in Streamlit secrets.")
+try:
+    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+except Exception:
+    st.error("OPENAI_API_KEY not found in Streamlit Secrets.")
     st.stop()
-
-client = OpenAI(api_key=api_key)
 
 question = st.text_area(
     "Enter your question",
-    height=150,
-    placeholder="Type any question..."
+    height=150
 )
 
-depth = st.slider("Depth", 1, 10, 5)
+depth = st.slider(
+    "Depth",
+    1,
+    10,
+    5
+)
 
 if st.button("Explore"):
 
-    if not question.strip():
-        st.warning("Enter a question.")
+    if question.strip() == "":
+        st.warning("Please enter a question.")
         st.stop()
 
     prompt = f"""
-You are MindDepth AI.
+You are an expert thinker.
+
+Analyze this question deeply.
 
 Question:
 {question}
 
-Analyze deeply.
-
-Return in Markdown with sections:
+Return the answer in Markdown using these headings:
 
 # Core Question
 
@@ -46,15 +50,15 @@ Return in Markdown with sections:
 
 # Hidden Beliefs
 
-# Possible Mental Barriers
+# Mental Barriers
 
-# 5 Why Chain
+# Five Why Analysis
 
 # Alternative Perspective
 
 # Final Conclusion
 
-Depth = {depth}
+Depth: {depth}
 """
 
     with st.spinner("Thinking..."):
@@ -65,17 +69,8 @@ Depth = {depth}
         )
 
     st.markdown(response.output_text)
-requirements.txt
-streamlit
-openai
-.streamlit/secrets.toml
-OPENAI_API_KEY="YOUR_API_KEY"
-ही पहिली चालणारी आवृत्ती आहे. GitHub वर टाकून Streamlit Cloud वर deploy केल्यावर ती चालेल.
-पुढची आवृत्ती आपण यात:
-🌳 Thought Tree
-❓ Infinite Why Engine
-🧠 Belief Graph
-📄 PDF Export
-💾 History
-🎙️ Voice Input
-जोडू शकतो.
+यानंतर:
+Commit changes कर.
+Streamlit आपोआप पुन्हा Deploy होईल.
+जर पुन्हा एरर आली तर नवीन स्क्रीनशॉट पाठव.
+हा कोड आधीच्या 🌳 Syntax Error पेक्षा स्वच्छ आहे आणि त्या त्रुटी येणार नाहीत.
