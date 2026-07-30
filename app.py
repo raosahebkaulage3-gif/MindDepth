@@ -69,8 +69,3 @@ Depth: {depth}
         )
 
     st.markdown(response.output_text)
-यानंतर:
-Commit changes कर.
-Streamlit आपोआप पुन्हा Deploy होईल.
-जर पुन्हा एरर आली तर नवीन स्क्रीनशॉट पाठव.
-हा कोड आधीच्या 🌳 Syntax Error पेक्षा स्वच्छ आहे आणि त्या त्रुटी येणार नाहीत.
